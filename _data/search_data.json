@@ -422,10 +422,10 @@
 		},
 		{
 			"title": "Python Client API",
-			"text": "span class target id module-duckdb span p duckdb is an embeddable sql olap database management system p",
+			"text": "span class target id module-duckdb span dl class py data",
 			"category": "Reference",
 			"url": "../docs/api/python/reference/index",
-			"blurb": "<span class=target id=module-duckdb> </span> <p> DuckDB is an embeddable SQL OLAP Database Management System </p>"
+			"blurb": "<span class=target id=module-duckdb> </span> <dl class=py data>"
 		},
 		{
 			"title": "Java JDBC API",
