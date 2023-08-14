@@ -91,6 +91,7 @@ selected: API Reference
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_nparams">duckdb_nparams</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_param_type">duckdb_param_type</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_clear_bindings">duckdb_clear_bindings</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_parameter_index">duckdb_bind_parameter_index</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="k">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_boolean">duckdb_bind_boolean</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">bool</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int8">duckdb_bind_int8</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int8_t</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int16">duckdb_bind_int16</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int16_t</span> <span class="k">val</span>);
@@ -130,6 +131,7 @@ selected: API Reference
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_pending_error">duckdb_pending_error</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
 <span class="k">duckdb_pending_state</span> <span class="nf"><a href="#duckdb_pending_execute_task">duckdb_pending_execute_task</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_pending">duckdb_execute_pending</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
+<span class="kt">bool</span> <span class="nf"><a href="#duckdb_pending_execution_is_finished">duckdb_pending_execution_is_finished</a></span>(<span class="k">duckdb_pending_state</span> <span class="k">pending_state</span>);
 </code></pre></div></div>
 ### **Value Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_value">duckdb_destroy_value</a></span>(<span class="kt">duckdb_value</span> *<span class="k">value</span>);
@@ -1813,6 +1815,20 @@ Clear the params bind to the prepared statement.
 </code></pre></div></div>
 <br>
 
+### duckdb_bind_parameter_index
+---
+Retrieve the index of the parameter for the prepared statement, identified by name
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_parameter_index</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> *<span class="k">param_idx_out</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
+</span>);
+</code></pre></div></div>
+<br>
+
 ### duckdb_bind_boolean
 ---
 Binds a bool value to the prepared statement at the specified index.
@@ -2484,6 +2500,28 @@ The result object.
 * `returns`
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### duckdb_pending_execution_is_finished
+---
+Returns whether a duckdb_pending_state is finished executing. For example if `pending_state` is
+DUCKDB_PENDING_RESULT_READY, this function will return true.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_pending_execution_is_finished</span>(<span class="k">
+</span>  <span class="k">duckdb_pending_state</span> <span class="k">pending_state
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `pending_state`
+
+The pending state on which to decide whether to finish execution.
+* `returns`
+
+Boolean indicating pending execution should be considered finished.
 
 <br>
 
