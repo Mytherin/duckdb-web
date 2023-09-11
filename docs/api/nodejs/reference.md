@@ -26,7 +26,7 @@ selected: Client APIs
 <a name="module_duckdb"></a>
 
 ## duckdb
-**Summary**: these jsdoc annotations are still a work in progress - feedback and suggestions are welcome!  
+**Summary**: DuckDB is an embeddable SQL OLAP Database Management System  
 
 * [duckdb](#module_duckdb)
     * [~Connection](#module_duckdb..Connection)
@@ -476,7 +476,7 @@ Triggers callback when all scheduled database tasks have completed.
 <a name="module_duckdb..Database+serialize"></a>
 
 #### database.serialize(callback) ⇒ <code>void</code>
-TODO: what does this do?
+Currently a no-op. Provided for SQLite compatibility
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
@@ -487,7 +487,7 @@ TODO: what does this do?
 <a name="module_duckdb..Database+parallelize"></a>
 
 #### database.parallelize(callback) ⇒ <code>void</code>
-TODO: what does this do?
+Currently a no-op. Provided for SQLite compatibility
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
